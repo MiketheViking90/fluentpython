@@ -1,3 +1,4 @@
+import collections
 from pprint import pprint
 
 a = dict(one=1, two=2, three=3)
@@ -25,3 +26,9 @@ country_stats = {}
 for country, stat in data:
     country_stats.setdefault(country, []).append(stat)
 pprint(country_stats)
+
+country_stats = collections.defaultdict(list)
+for country, stat in data:
+    country_stats[country].append(stat)
+pprint(country_stats)
+
