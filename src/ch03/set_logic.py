@@ -15,3 +15,8 @@ print(a, s)
 
 s = {chr(i) for i in range(32, 256) if 'SIGN' in name(chr(i), '')}
 print(s)
+
+print(needle | haystack)
+print(needle & haystack)
+print(needle - haystack)
+print(needle ^ haystack)
