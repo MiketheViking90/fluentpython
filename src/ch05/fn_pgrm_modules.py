@@ -16,6 +16,7 @@ metro_data = [
     ('New York-Newark', 'US', 20.104, (40.808611, -74.020386)),
     ('Sao Paulo', 'BR', 19.649, (-23.547778, -46.635833)) ]
 
+pprint(sorted(metro_data))
 sorted_by_country = sorted(metro_data, key=itemgetter(1))
 pprint(sorted_by_country)
 pprint(sorted(metro_data, key=itemgetter(2)))
