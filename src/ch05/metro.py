@@ -1,5 +1,7 @@
+from collections import OrderedDict
 from operator import attrgetter
 from pprint import pprint
+from typing import List, Dict
 
 
 class Metropolis:
@@ -22,5 +24,17 @@ metro_data = [
 
 metros = [Metropolis(name, country, pop, lat, long) for name, country, pop, (lat, long) in metro_data]
 metros.sort(key=attrgetter('_country', '_name'))
-pprint(metros)
 
+metro_dict = {city: {'country': country, 'pop': pop, 'lat': lat, 'long': long}
+              for city, country, pop, (lat, long) in metro_data}
+metro_dict['San Francisco'] = {'country': 'US', 'pop': 3.2}
+
+def sort_by_lat(data: Dict) -> float:
+    return data[1].get('lat', 0)
+
+metros_by_lat = OrderedDict(sorted(metro_dict.items(), key=sort_by_lat))
+pprint(metros_by_lat)
+
+metros_order = OrderedDict(metro_dict)
+pprint(metros_order)
+print(metros_by_lat['San Francisco'])
