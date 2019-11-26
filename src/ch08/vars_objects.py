@@ -15,3 +15,6 @@ a = 12
 b = 12
 
 print(a is b)
+a = 12
+c = None
+print (a == c)
