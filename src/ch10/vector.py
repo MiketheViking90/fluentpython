@@ -1,4 +1,5 @@
 import math
+import numbers
 import reprlib
 
 
@@ -15,9 +16,6 @@ class Vector:
         components_repr = reprlib.repr(self._components)
         return 'Vector({})'.format(components_repr)
 
-    def __str__(self):
-        return str(tuple(self))
-
     def __bytes__(self):
         return (bytes([ord(self.typecode)]) + bytes(self._components))
 
@@ -33,10 +31,21 @@ class Vector:
         return len(self._components)
 
     def __getitem__(self, index):
-        return self._components[index]
+        cls = type(self)
+        if isinstance(index, slice):
+            return Vector(self._components[index])
+        elif isinstance(index, numbers.Integral):
+            return self._components[index]
+        else:
+            raise TypeError("indices must be integers")
 
     @classmethod
     def frombytes(cls, octets):
         typecode = chr(octets[0])
         memv = memoryview(octets[1:]).cast(typecode)
         return cls(memv)
+
+v = Vector(range(12))
+print(v)
+
+print(repr(v[1:4:2]))
