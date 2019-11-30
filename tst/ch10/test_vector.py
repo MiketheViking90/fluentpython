@@ -13,3 +13,8 @@ class TestVector(TestCase):
 
     def test_len(self):
         assert len(vector) == 5
+
+    def test_get_item(self):
+        assert vector[-1] == 5
+        assert vector[3] == 4
+        assert vector[1:4] == [2,3,4]
