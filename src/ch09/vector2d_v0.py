@@ -1,4 +1,5 @@
 import math
+import reprlib
 from array import array
 
 
@@ -21,7 +22,7 @@ class Vector2d:
         return (i for i in (self.x, self.y))
 
     def __repr__(self):
-        return f'{self.__class__.__name__}: ({self.x}, {self.y})'
+        return f'{self.__class__.__name__}: {self.__dict__}'
 
     def __str__(self):
         return str(tuple(self))
