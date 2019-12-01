@@ -1,5 +1,7 @@
+import functools
 import math
 import numbers
+import operator
 import reprlib
 
 
@@ -20,7 +22,8 @@ class Vector:
         return (bytes([ord(self.typecode)]) + bytes(self._components))
 
     def __eq__(self, other):
-        return tuple(self) == tuple(other)
+        return  len(self) != len(other) \
+                and all(a == b for a, b in zip(self, len))
 
     def __abs__(self):
         return math.sqrt(sum(x * x for x in self))
@@ -45,7 +48,18 @@ class Vector:
         memv = memoryview(octets[1:]).cast(typecode)
         return cls(memv)
 
+    def __hash__(self):
+        hashes = [hash(x) for x in self._components]
+        return functools.reduce(operator.xor, hashes, 0)
+
 v = Vector(range(12))
 print(v)
 
 print(repr(v[1:4:2]))
+print(v)
+
+v1 = Vector([1, 3.2, 148])
+print(hash(v))
+print(hash(v1))
+set = {v, v1}
+print(set)
