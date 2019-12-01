@@ -49,8 +49,7 @@ class Vector:
         return cls(memv)
 
     def __hash__(self):
-        hashes = [hash(x) for x in self._components]
-        return functools.reduce(operator.xor, hashes, 0)
+        return hash(tuple(self._components))
 
 v = Vector(range(12))
 print(v)
